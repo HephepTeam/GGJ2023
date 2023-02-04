@@ -3,9 +3,14 @@ extends Area2D
 var hovered = false
 var grabbed = false
 
-signal dropped(entity)
+@export_file  var tiny_icon = "res://assets/graphics/modifier/Fleur_Dépolluante_icon.png"
 
-var pollution_modifier = 2
+signal dropped(entity)
+@export var apply_on = ""
+@export var pollution_modifier = 0
+@export var side_effect_modifier = 0
+@export var turn_modifier = 0
+var modifiers = null
 
 const hovered_offset = 0.3
 
@@ -13,7 +18,8 @@ const hovered_offset = 0.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	%Modifiers.initialize(pollution_modifier,side_effect_modifier,turn_modifier, apply_on)
+	modifiers = %Modifiers
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,6 +47,8 @@ func _on_input_event(viewport, event, shape_idx):
 			emit_signal("dropped", self)
 			grabbed = false
 
+func get_texture():
+	return load(tiny_icon)
 
 func _on_mouse_exited():
 	hovered = false

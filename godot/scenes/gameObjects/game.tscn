@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx6pw8d3kjqiv"]
+[gd_scene load_steps=5 format=3 uid="uid://dx6pw8d3kjqiv"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/game.gd" id="1_5puaj"]
+[ext_resource type="PackedScene" uid="uid://c56560faryucm" path="res://scenes/UI/sprite_button.tscn" id="2_ujeim"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
 resource_name = "Tiles"
@@ -31,3 +32,23 @@ position = Vector2(1080, 496)
 
 [node name="mod2" type="Marker2D" parent="board"]
 position = Vector2(832, 776)
+
+[node name="Node2D" type="Node2D" parent="board"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SpriteButton" parent="CanvasLayer" instance=ExtResource("2_ujeim")]
+position = Vector2(208, 904)
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 1488.0
+offset_top = 112.0
+offset_right = 1696.0
+offset_bottom = 198.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "100 pts"
+
+[connection signal="pressed" from="CanvasLayer/SpriteButton" to="." method="_on_sprite_button_pressed"]

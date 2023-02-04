@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c371crce51hxh"]
+[gd_scene load_steps=4 format=3 uid="uid://c371crce51hxh"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/tuile_base.gd" id="1_eu28o"]
 [ext_resource type="Texture2D" uid="uid://ba50nx868jx5o" path="res://assets/graphics/tuile_test.png" id="2_e2tan"]
+[ext_resource type="PackedScene" uid="uid://isgbln7bjgwj" path="res://scenes/modifiers.tscn" id="3_51mhp"]
 
 [node name="Tuile" type="Node2D"]
 script = ExtResource("1_eu28o")
@@ -11,16 +12,25 @@ texture_filter = 1
 texture = ExtResource("2_e2tan")
 
 [node name="Label" type="RichTextLabel" parent="Spr"]
-offset_left = -35.0
-offset_top = -30.0
-offset_right = 35.0
-offset_bottom = 28.0
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 38.0
+offset_bottom = -22.0
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "1"
 shortcut_keys_enabled = false
+
+[node name="mod_icons" type="HBoxContainer" parent="Spr"]
+offset_left = 16.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = -32.0
+mouse_filter = 2
+theme_override_constants/separation = -10
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -29,6 +39,9 @@ polygon = PackedVector2Array(0, -80, -145, -8, 0, 72, 145, -8)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Modifiers" parent="." instance=ExtResource("3_51mhp")]
+unique_name_in_owner = true
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

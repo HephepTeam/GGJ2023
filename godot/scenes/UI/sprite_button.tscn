@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c56560faryucm"]
+
+[ext_resource type="Script" path="res://scenes/UI/sprite_button.gd" id="1_sgdws"]
+[ext_resource type="Texture2D" uid="uid://bb7rw1bqdh8st" path="res://assets/graphics/Next_Turn.png" id="2_e56or"]
+
+[node name="SpriteButton" type="Area2D"]
+script = ExtResource("1_sgdws")
+
+[node name="Spr" type="Sprite2D" parent="."]
+texture = ExtResource("2_e56or")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-88, -120)
+polygon = PackedVector2Array(-56, 0, 232, 0, 232, 240, -56, 240)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

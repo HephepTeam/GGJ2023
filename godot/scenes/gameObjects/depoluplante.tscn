@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3aprvsqvaij2"]
+[gd_scene load_steps=4 format=3 uid="uid://b3aprvsqvaij2"]
 
 [ext_resource type="PackedScene" uid="uid://7x1j0nmiwlvc" path="res://scenes/gameObjects/modifier.tscn" id="1_273hs"]
 [ext_resource type="Texture2D" uid="uid://dbev35ux4vul4" path="res://assets/graphics/modifier/Fleur_Dépolluante.png" id="2_p0qab"]
+[ext_resource type="Script" path="res://scenes/Modifiers.gd" id="3_mdxdg"]
 
 [node name="Depoluplante" instance=ExtResource("1_273hs")]
+apply_on = "Plaine"
+pollution_modifier = 1
 
 [node name="Spr" parent="." index="0"]
 texture = ExtResource("2_p0qab")
 
 [node name="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-81, -69, -74, -26, -38, 60, 16, 120, 66, 3, 41, -48, 8, -95, -9, -59)
+
+[node name="Modifiers" type="Node" parent="." index="2"]
+unique_name_in_owner = true
+script = ExtResource("3_mdxdg")
