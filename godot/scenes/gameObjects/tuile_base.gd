@@ -8,6 +8,8 @@ signal tile_pressed(coord : Vector2)
 var tile_coord = Vector2i() : set = set_tile_coord
 
 @export var apply_on = ""
+@export var vegetalisation = false
+@export var reforestation = false
 @export var pollution_modifier = 0
 @export var side_effect_modifier = 0
 @export var turn_modifier = 0
@@ -18,6 +20,7 @@ func set_tile_coord(new_coord):
 var hovered = false
 var falling = false
 var fading = false
+var side_effect_applied = false 
 
 var amplitude = 0 as float
 
@@ -26,7 +29,7 @@ const falling_offset = 2000.0
 var modifiers = null
 
 func _ready():
-	%Modifiers.initialize(pollution_modifier, side_effect_modifier, turn_modifier, apply_on)
+	%Modifiers.initialize(pollution_modifier, side_effect_modifier, turn_modifier, apply_on,vegetalisation,reforestation)
 	modifiers = %Modifiers
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,7 +56,7 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 			hovered = true
 			
 	if event is InputEventMouseButton:
-		if event.is_pressed() and !falling:
+		if event.is_pressed() and !falling and Globals.game.gameState == Globals.game.gameStates.PLAYING:
 			emit_signal("tile_pressed", tile_coord)
 			squash(1.4,1.4)
 
@@ -99,7 +102,9 @@ func add_modifier(mod,spr_mod):
 		$Spr/mod_icons.add_child(texture)
 	$Timer.start()
 	amplitude = 15
-	%Modifiers.pollution_modifier += mod
+	%Modifiers.pollution_modifier += mod.pollution_modifier
+	%Modifiers.turn_modifier += mod.turn_modifier
+	
 	
 func get_side_effect():
 	return modifiers["side_effect"]

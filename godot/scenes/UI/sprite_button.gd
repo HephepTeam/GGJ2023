@@ -2,6 +2,7 @@ extends Area2D
 
 signal pressed
 
+var enable = false
 var hovered = false
 const hovered_offset = 0.2
 # Called when the node enters the scene tree for the first time.
@@ -18,13 +19,16 @@ func _process(delta):
 
 
 func _on_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseMotion):
-		if !hovered:
-			hovered = true
-			
-	if (event is InputEventMouseButton) and hovered:
-		if event.is_pressed():
-			emit_signal("pressed")
+	if Globals.game.gameState == Globals.game.gameStates.PLAYING and enable:
+		if (event is InputEventMouseMotion):
+			if !hovered:
+				hovered = true
+				
+		if (event is InputEventMouseButton) and hovered:
+			if event.is_pressed():
+				get_viewport().set_input_as_handled()
+				print("test")
+				emit_signal("pressed")
 
 
 func _on_mouse_exited():

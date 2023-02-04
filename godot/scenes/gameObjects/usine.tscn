@@ -7,7 +7,7 @@
 [node name="Usine" instance=ExtResource("1_2pxi2")]
 script = ExtResource("2_yhowi")
 pollution_modifier = -2
-side_effect_modifier = 1
+side_effect_modifier = -1
 
 [node name="Spr" parent="." index="0"]
 texture = ExtResource("3_w6v3o")

@@ -6,6 +6,8 @@ var grabbed = false
 @export_file  var tiny_icon = "res://assets/graphics/modifier/Fleur_Dépolluante_icon.png"
 
 signal dropped(entity)
+@export var vegetalisation = false
+@export var reforestation = false
 @export var apply_on = ""
 @export var pollution_modifier = 0
 @export var side_effect_modifier = 0
@@ -18,7 +20,7 @@ const hovered_offset = 0.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	%Modifiers.initialize(pollution_modifier,side_effect_modifier,turn_modifier, apply_on)
+	%Modifiers.initialize(pollution_modifier,side_effect_modifier,turn_modifier, apply_on,vegetalisation,reforestation)
 	modifiers = %Modifiers
 
 
@@ -36,16 +38,17 @@ func _process(delta):
 
 
 func _on_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseMotion):
-		if !hovered:
-			hovered = true
-			
-	if (event is InputEventMouseButton) and hovered:
-		if event.is_pressed():
-			grabbed = true
-		else:
-			emit_signal("dropped", self)
-			grabbed = false
+	if Globals.game.gameState == Globals.game.gameStates.PLAYING:
+		if (event is InputEventMouseMotion):
+			if !hovered:
+				hovered = true
+				
+		if (event is InputEventMouseButton) and hovered:
+			if event.is_pressed():
+				grabbed = true
+			else:
+				emit_signal("dropped", self)
+				grabbed = false
 
 func get_texture():
 	return load(tiny_icon)

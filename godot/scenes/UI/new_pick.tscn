@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://caju50huvnkro"]
+
+[ext_resource type="PackedScene" uid="uid://c56560faryucm" path="res://scenes/UI/sprite_button.tscn" id="1_s5lf7"]
+[ext_resource type="Texture2D" uid="uid://bu2nd2gldvm61" path="res://assets/graphics/Nouveau_Tirage.png" id="2_wuoqx"]
+
+[node name="new_pick" instance=ExtResource("1_s5lf7")]
+
+[node name="Spr" parent="." index="0"]
+texture = ExtResource("2_wuoqx")

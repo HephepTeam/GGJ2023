@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgd6f70rg4d02"]
+
+[ext_resource type="PackedScene" uid="uid://csidf0pvquekf" path="res://scenes/gameObjects/draggable.tscn" id="1_diey7"]
+[ext_resource type="Texture2D" uid="uid://brrbheqoub0xd" path="res://assets/graphics/modifier/reforestation.png" id="2_a4rpa"]
+
+[node name="Reforestation" instance=ExtResource("1_diey7")]
+tiny_icon = "res://assets/graphics/modifier/reforestation.png"
+reforestation = true
+apply_on = "Plaine"
+turn_modifier = 2
+
+[node name="Spr" parent="." index="0"]
+texture = ExtResource("2_a4rpa")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(1, -108, -85, -9, -68, 87, 22, 85, 84, -8, 84, -96)
+
+[node name="Modifiers" parent="." index="2"]
+apply_on = "Plaine"
+turn_modifier = 2

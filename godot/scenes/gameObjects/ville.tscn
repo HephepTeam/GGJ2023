@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmy4ub4vvowx3"]
+[gd_scene load_steps=4 format=3 uid="uid://cmy4ub4vvowx3"]
 
 [ext_resource type="PackedScene" uid="uid://c371crce51hxh" path="res://scenes/gameObjects/tuile_base.tscn" id="1_70umr"]
+[ext_resource type="Script" path="res://scenes/gameObjects/ville.gd" id="2_fwydu"]
 [ext_resource type="Texture2D" uid="uid://cmo0a3gptr83x" path="res://assets/graphics/modifier/Tuile_Ville.png" id="2_xk8du"]
 
 [node name="Ville" instance=ExtResource("1_70umr")]
+script = ExtResource("2_fwydu")
 pollution_modifier = -1
 
 [node name="Spr" parent="." index="0"]

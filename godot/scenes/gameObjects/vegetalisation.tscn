@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckl7jhd75bgv3"]
+
+[ext_resource type="PackedScene" uid="uid://csidf0pvquekf" path="res://scenes/gameObjects/draggable.tscn" id="1_7ifs0"]
+[ext_resource type="Texture2D" uid="uid://encxu47mj5ad" path="res://assets/graphics/modifier/vegetalisation.png" id="2_8d6aq"]
+
+[node name="Vegetalisation" instance=ExtResource("1_7ifs0")]
+vegetalisation = true
+apply_on = "Ville"
+
+[node name="Spr" parent="." index="0"]
+texture = ExtResource("2_8d6aq")

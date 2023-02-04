@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dx6pw8d3kjqiv"]
+[gd_scene load_steps=6 format=3 uid="uid://dx6pw8d3kjqiv"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/game.gd" id="1_5puaj"]
+[ext_resource type="Texture2D" uid="uid://b6tt871t8uhb5" path="res://assets/graphics/Fond_Bleu.png" id="2_h8dan"]
 [ext_resource type="PackedScene" uid="uid://c56560faryucm" path="res://scenes/UI/sprite_button.tscn" id="2_ujeim"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
@@ -14,6 +15,10 @@ sources/0 = SubResource("TileSetScenesCollectionSource_he5r6")
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_5puaj")
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("2_h8dan")
+centered = false
 
 [node name="board" type="Node2D" parent="."]
 position = Vector2(640, 128)
@@ -37,7 +42,8 @@ position = Vector2(832, 776)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SpriteButton" parent="CanvasLayer" instance=ExtResource("2_ujeim")]
+[node name="EndTurn" parent="CanvasLayer" instance=ExtResource("2_ujeim")]
+visible = false
 position = Vector2(208, 904)
 
 [node name="Score" type="Label" parent="CanvasLayer"]
@@ -51,4 +57,4 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 60
 text = "100 pts"
 
-[connection signal="pressed" from="CanvasLayer/SpriteButton" to="." method="_on_sprite_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndTurn" to="." method="_on_sprite_button_pressed"]
