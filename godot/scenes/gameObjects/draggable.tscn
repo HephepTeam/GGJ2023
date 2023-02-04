@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://csidf0pvquekf"]
+
+[ext_resource type="Script" path="res://scenes/gameObjects/draggable.gd" id="1_qn5yw"]
+[ext_resource type="Texture2D" uid="uid://ba50nx868jx5o" path="res://assets/graphics/tuile_test.png" id="2_cbfm7"]
+
+[node name="Draggable" type="Area2D"]
+script = ExtResource("1_qn5yw")
+
+[node name="Spr" type="Sprite2D" parent="."]
+texture = ExtResource("2_cbfm7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, -95, -141, -13, -141, 55, 0, 137, 146, 55, 145, -7)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://7x1j0nmiwlvc"]
+
+[ext_resource type="PackedScene" uid="uid://csidf0pvquekf" path="res://scenes/gameObjects/draggable.tscn" id="1_dgcbu"]
+
+[node name="Modifier" instance=ExtResource("1_dgcbu")]

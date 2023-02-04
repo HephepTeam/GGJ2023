@@ -8,37 +8,9 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Control",
-"class": &"Bootsplash",
-"language": &"GDScript",
-"path": "res://ui/components/Bootsplash.gd"
-}, {
-"base": "Control",
-"class": &"BootsplashScene",
-"language": &"GDScript",
-"path": "res://scenes/boot/BootsplashScene.gd"
-}, {
-"base": "ColorRect",
-"class": &"FadeOverlay",
-"language": &"GDScript",
-"path": "res://ui/overlays/FadeOverlay.gd"
-}, {
-"base": "Node",
-"class": &"SaveGame",
-"language": &"GDScript",
-"path": "res://savegame/SaveGame.gd"
-}]
-_global_script_class_icons={
-"Bootsplash": "",
-"BootsplashScene": "",
-"FadeOverlay": "",
-"SaveGame": ""
-}
-
 [application]
 
-config/name="MyGame"
+config/name="IntoTheFriche"
 run/main_scene="res://scenes/boot/godot/GodotBootsplashScene.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.svg"
@@ -49,12 +21,16 @@ UserSettings="*res://settings/UserSettings.gd"
 
 [display]
 
-window/size/viewport_width=576
-window/size/viewport_height=324
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
+
+[editor]
+
+export/convert_text_resources_to_binary=true
 
 [gui]
 

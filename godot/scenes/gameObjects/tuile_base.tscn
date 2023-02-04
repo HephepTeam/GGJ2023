@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c371crce51hxh"]
+
+[ext_resource type="Script" path="res://scenes/gameObjects/tuile_base.gd" id="1_eu28o"]
+[ext_resource type="Texture2D" uid="uid://ba50nx868jx5o" path="res://assets/graphics/tuile_test.png" id="2_e2tan"]
+
+[node name="Tuile" type="Node2D"]
+script = ExtResource("1_eu28o")
+
+[node name="Spr" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_e2tan")
+
+[node name="Label" type="RichTextLabel" parent="Spr"]
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 35.0
+offset_bottom = 28.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "1"
+shortcut_keys_enabled = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -80, -145, -8, 0, 72, 145, -8)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
