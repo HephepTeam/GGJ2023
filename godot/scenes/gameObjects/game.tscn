@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dx6pw8d3kjqiv"]
+[gd_scene load_steps=13 format=3 uid="uid://dx6pw8d3kjqiv"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/game.gd" id="1_5puaj"]
 [ext_resource type="Texture2D" uid="uid://b6tt871t8uhb5" path="res://assets/graphics/Fond_Bleu.png" id="2_h8dan"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b8kb6ju5xyoyd" path="res://assets/sfx/bruit_drop.mp3" id="7_mgevl"]
 [ext_resource type="PackedScene" uid="uid://ch8fsndl2yyqg" path="res://scenes/UI/ScorePanel.tscn" id="8_iux4o"]
 [ext_resource type="PackedScene" uid="uid://bervp8aae0i80" path="res://scenes/UI/panneau.tscn" id="9_17hor"]
+[ext_resource type="PackedScene" uid="uid://su66uig8fu31" path="res://scenes/UI/TutoPanel.tscn" id="10_kp756"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
 resource_name = "Tiles"
@@ -75,6 +76,23 @@ offset_right = 1824.0
 [node name="FXdrop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_mgevl")
 bus = &"Sound"
+
+[node name="tutoCanvas" type="CanvasLayer" parent="."]
+
+[node name="TutoPanel" parent="tutoCanvas" instance=ExtResource("10_kp756")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -448.0
+offset_right = 640.0
+offset_bottom = 448.0
+grow_horizontal = 2
+grow_vertical = 2
+click_to_hide = true
 
 [connection signal="pressed" from="CanvasLayer/new_pick" to="." method="_on_new_pick_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurn" to="." method="_on_sprite_button_pressed"]

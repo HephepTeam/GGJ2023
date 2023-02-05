@@ -20,14 +20,17 @@ columns = 4
 
 [node name="Empty1" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 
 [node name="Empty2" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 
 [node name="Language" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_language"
 
@@ -39,6 +42,7 @@ theme_override_font_sizes/font_size = 40
 [node name="MasterVolumeEnabled" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 theme = ExtResource("2_mudwu")
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_master_enabled"
 
@@ -49,6 +53,7 @@ button_pressed = true
 
 [node name="MasterVolumeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_master"
 
@@ -59,6 +64,7 @@ property = "mastervolume"
 
 [node name="MusicEnabledLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_music_enabled"
 
@@ -69,6 +75,7 @@ button_pressed = true
 
 [node name="MusicVolumeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_music"
 
@@ -79,6 +86,7 @@ property = "musicvolume"
 
 [node name="SoundEnabledLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_sound_enabled"
 
@@ -89,6 +97,7 @@ button_pressed = true
 
 [node name="SoundVolumeLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 40
 text = "settings_volume_sound"
 

@@ -20,10 +20,10 @@ offset_left = 56.0
 offset_top = 24.0
 offset_right = 488.0
 offset_bottom = 224.0
+theme_override_colors/default_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = 15
 theme_override_constants/table_v_separation = 0
-theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "\"pollution score: [color=%s]%s[/color]

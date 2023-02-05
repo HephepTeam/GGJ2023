@@ -61,6 +61,7 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseMotion):
 		if !hovered:
 			hovered = true
+			$FXpop.play()
 			emit_signal("tile_hovered", self)
 			
 	if event is InputEventMouseButton:
@@ -116,6 +117,7 @@ func drop_animation():
 	$FXclic.play()
 	
 func make_highlight():
+	$FXpop.play()
 	fading = true
 	squash(1.4,1.4)
 	var tween = get_tree().create_tween()

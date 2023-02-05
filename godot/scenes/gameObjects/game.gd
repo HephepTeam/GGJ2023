@@ -30,7 +30,7 @@ var modifier_picked_twice = false
 @onready var modmarkers = [$board/mod0, $board/mod1, $board/mod2]
 
 func on_tile_pressed(coord):
-	print(coord)
+	pass
 	
 func on_tile_hovered(tile):
 	if tile != null:
@@ -52,6 +52,14 @@ func on_tile_hovered(tile):
 func _ready():
 	Globals.game = self
 	Globals.start_music()
+	
+	if !Globals.tuto_seen:
+		await %TutoPanel.destroyed
+		Globals.tuto_seen = true
+	else:
+		if $TutoPanel != null:
+			$TutoPanel.visible = false
+			$TutoPanel.queue_free()
 	
 	randomize()
 	init_board()
@@ -144,6 +152,7 @@ func check_board():
 	
 func end_turn():
 	#check board
+	print("end turn")
 	var result = check_board()
 	for tile in board.get_children():
 		tile.make_highlight()
@@ -156,6 +165,7 @@ func end_turn():
 	if result < 0:
 		$CanvasLayer/Score.set_color( Color.BROWN)
 		game_over = true
+		$CanvasLayer/EndTurn.retry_mode()
 	else:
 		$CanvasLayer/Score.set_color( Color.CHARTREUSE)
 	
@@ -164,7 +174,6 @@ func end_turn():
 	$CanvasLayer/EndTurn.anim_pop()
 	
 func process_board_evolution():
-	print("board evol")
 	for tile in board.get_children():
 		if tile.has_method("end_turn"):
 			tile.end_turn()
@@ -234,7 +243,7 @@ func reset_board():
 	modifier_available = 3
 	pick_modifiers()
 	reset_tiles_numbers()
-	$CanvasLayer/Score.visible = false
+	$CanvasLayer/Score.anim_fade_out()
 	gameState = gameStates.PLAYING
 	
 func reset_tiles_numbers():

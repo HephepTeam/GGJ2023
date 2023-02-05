@@ -49,10 +49,12 @@ func _on_input_event(viewport, event, shape_idx):
 		if (event is InputEventMouseButton) and hovered:
 			if event.is_pressed():
 				get_viewport().set_input_as_handled()
-				print("test")
 				emit_signal("pressed")
 				$FXclic.play()
 				anim_depop()
+				
+func retry_mode():
+	$Spr.texture = load("res://assets/graphics/try_again.png")
 
 
 func _on_mouse_exited():

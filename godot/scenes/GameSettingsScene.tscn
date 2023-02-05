@@ -23,8 +23,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="SettingsLabel" type="Label" parent="UI/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1302, 72)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(0.6, 0.466667, 0.317647, 1)
 theme_override_font_sizes/font_size = 50
 text = "settings"
 
@@ -35,6 +37,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_unbh4")
+theme_override_colors/font_color = Color(0.811765, 0.686275, 0.541176, 1)
 theme_override_font_sizes/font_size = 40
 text = "return_to_main"
 
