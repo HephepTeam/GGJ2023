@@ -1,0 +1,17 @@
+Made with:
+Godot Engine 4
+Procreate
+Fruityloops
+
+Game Design:
+Laurine BOYER
+Michaël BOYER
+
+Code:
+Michaël BOYER
+
+Graphics:
+Laurine BOYER
+
+Sound FX and Music:
+Laurine BOYER
