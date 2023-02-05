@@ -1,3 +1,6 @@
 ![Into-the-friches](logo.jpg)
 
-**🤖 Godot Engine 4.0 template to better get started for gamejams with your game!**
+**A Godot 4 game for the Global Game Jam 2023**
+
+Jam site: 
+Cergy-Pontoise
