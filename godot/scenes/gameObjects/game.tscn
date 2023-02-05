@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://caju50huvnkro" path="res://scenes/UI/new_pick.tscn" id="4_6fo7d"]
 [ext_resource type="PackedScene" uid="uid://u818a31vxrv6" path="res://scenes/UI/turn_panel.tscn" id="5_0p0v8"]
 [ext_resource type="PackedScene" uid="uid://cpbpxbxl3kc24" path="res://scenes/UI/tooltip.tscn" id="6_2pxsm"]
-[ext_resource type="AudioStream" uid="uid://beh1n525hvkpl" path="res://assets/music/Musique_into_the_friche_ggj_2923.mp3" id="6_5hx0k"]
 [ext_resource type="AudioStream" uid="uid://b8kb6ju5xyoyd" path="res://assets/sfx/bruit_drop.mp3" id="7_mgevl"]
+[ext_resource type="PackedScene" uid="uid://ch8fsndl2yyqg" path="res://scenes/UI/ScorePanel.tscn" id="8_iux4o"]
 [ext_resource type="PackedScene" uid="uid://bervp8aae0i80" path="res://scenes/UI/panneau.tscn" id="9_17hor"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
@@ -47,17 +47,6 @@ position = Vector2(832, 776)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Score" type="Label" parent="CanvasLayer"]
-visible = false
-offset_left = 1488.0
-offset_top = 112.0
-offset_right = 1696.0
-offset_bottom = 198.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 60
-text = "100 pts"
-
 [node name="new_pick" parent="CanvasLayer" instance=ExtResource("4_6fo7d")]
 position = Vector2(1576, 752)
 
@@ -79,11 +68,9 @@ offset_top = 800.0
 offset_right = 1361.0
 offset_bottom = 1008.0
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("6_5hx0k")
-autoplay = true
-bus = &"Music"
+[node name="Score" parent="CanvasLayer" instance=ExtResource("8_iux4o")]
+offset_left = 1432.0
+offset_right = 1824.0
 
 [node name="FXdrop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_mgevl")

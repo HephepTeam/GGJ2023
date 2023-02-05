@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp7n6i3snsbpd"]
+[gd_scene load_steps=3 format=3 uid="uid://dp7n6i3snsbpd"]
 
+[ext_resource type="AudioStream" uid="uid://beh1n525hvkpl" path="res://assets/music/Musique_into_the_friche_ggj_2923.mp3" id="1_8y8ft"]
 [ext_resource type="Script" path="res://Globals.gd" id="1_rnu60"]
 
 [node name="Globals" type="Node"]
 script = ExtResource("1_rnu60")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("1_8y8ft")
+bus = &"Music"

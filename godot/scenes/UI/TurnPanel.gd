@@ -7,6 +7,9 @@ func _ready():
 
 func set_text(text):
 	$Label.text = text
+	
+func set_color(color):
+	$Label.modulate = color
 
 func anim_fade():
 	var tween = get_tree().create_tween()

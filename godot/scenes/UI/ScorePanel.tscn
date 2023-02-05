@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch8fsndl2yyqg"]
+
+[ext_resource type="Texture2D" uid="uid://b27kehkj52w0w" path="res://assets/graphics/UI/Boîte_Dialogue.png" id="1_b8rh7"]
+[ext_resource type="Script" path="res://scenes/UI/TurnPanel.gd" id="2_77cxk"]
+
+[node name="ScorePanel" type="NinePatchRect"]
+offset_right = 392.0
+offset_bottom = 208.0
+texture = ExtResource("1_b8rh7")
+region_rect = Rect2(-3, -10, 278, 290)
+patch_margin_left = 75
+patch_margin_top = 107
+patch_margin_right = 53
+patch_margin_bottom = 59
+script = ExtResource("2_77cxk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 72.0
+offset_right = 336.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "100pts"
+horizontal_alignment = 1
+vertical_alignment = 1

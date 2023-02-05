@@ -1,23 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmmr5jbylu08i"]
+[gd_scene load_steps=2 format=3 uid="uid://cmmr5jbylu08i"]
 
 [ext_resource type="Texture2D" uid="uid://dbi3kwcagajfd" path="res://scenes/boot/logo.png" id="1_oqtgn"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_cbnh2"]
 
 [node name="GodotLogo" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -19)
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_oqtgn")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -105.0
-offset_top = 15.0
-offset_right = 105.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 20
+[node name="Label2" type="Label" parent="."]
+offset_left = -192.0
+offset_top = 160.0
+offset_right = 197.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 60
 text = "Godot Engine"
-label_settings = SubResource("LabelSettings_cbnh2")
-horizontal_alignment = 1
-vertical_alignment = 1

@@ -126,8 +126,6 @@ func make_highlight():
 
 func reset_numbers():
 	fading = false
-	var tween = get_tree().create_tween()
-	tween.set_trans(Tween.TRANS_EXPO)
 	$Spr/Label.position += Vector2(0,50)
 	
 	

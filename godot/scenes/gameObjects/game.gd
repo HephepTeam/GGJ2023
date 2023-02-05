@@ -1,6 +1,7 @@
 extends Node2D
 
 signal board_ready
+signal restart_game
 
 const description = "Pollution : [color=%s]%s[/color]\nBonus sur les tuiles adjacentes: [color=%s]%s[/color]\nEffet: %s "
 
@@ -18,6 +19,7 @@ const board_size = 5
 
 enum gameStates {INIT, PLAYING, WAITING_FOR_INPUT}
 var gameState = gameStates.INIT
+var game_over = false
 var turn_count = 0
 var modifier_available = 3
 var modifier_picked_twice = false
@@ -49,6 +51,7 @@ func on_tile_hovered(tile):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.game = self
+	Globals.start_music()
 	
 	randomize()
 	init_board()
@@ -146,14 +149,15 @@ func end_turn():
 		tile.make_highlight()
 		await get_tree().create_timer(0.1).timeout
 		
-	$CanvasLayer/Score.text = str(result) + " pts"
-	$CanvasLayer/Score.visible = true
+	$CanvasLayer/Score.set_text(str(result) + " pts")
+	$CanvasLayer/Score.anim_fade()
 	
 	#then show score
 	if result < 0:
-		$CanvasLayer/Score.modulate = Color.BROWN
+		$CanvasLayer/Score.set_color( Color.BROWN)
+		game_over = true
 	else:
-		$CanvasLayer/Score.modulate = Color.CHARTREUSE
+		$CanvasLayer/Score.set_color( Color.CHARTREUSE)
 	
 	gameState = gameStates.WAITING_FOR_INPUT
 	$CanvasLayer/EndTurn.enable = true
@@ -198,17 +202,26 @@ func _on_modfier_dropped(entity):
 	if (map_coord.x < board_size and map_coord.y < board_size) and (map_coord.x >= 0 and map_coord.y >= 0):
 		var tile = get_tile_from_map_coord(map_coord)
 		if tile.name.contains(entity.modifiers.apply_on):
-			modifier_available -= 1
-			entity.visible = false
-			$FXdrop.play()
-			if entity.modifiers.apply_on == "Ville" and tile.turn_left != -1:
+			if entity.modifiers.apply_on == "Ville" and !tile.turn_left < 0:
 				tile.add_modifier(entity.modifiers, entity.get_texture(), true)
+				modifier_available -= 1
+				entity.visible = false
+				$FXdrop.play()
+				entity.queue_free()
 			else:
 				if entity.modifiers.reforestation:
 					tile.add_modifier(entity.modifiers, null)
+					modifier_available -= 1
+					entity.visible = false
+					$FXdrop.play()
+					entity.queue_free()
 				else:
-					tile.add_modifier(entity.modifiers, entity.get_texture())
-			entity.queue_free()
+					if !entity.modifiers.vegetalisation:
+						tile.add_modifier(entity.modifiers, entity.get_texture())
+						modifier_available -= 1
+						entity.visible = false
+						$FXdrop.play()
+						entity.queue_free()
 	await get_tree().create_timer(1.0).timeout
 	if !(modifier_available > 0):
 		end_turn()
@@ -231,11 +244,15 @@ func reset_tiles_numbers():
 
 func _on_sprite_button_pressed():
 	if gameState == gameStates.WAITING_FOR_INPUT:
-		turn_count+=1
-		$CanvasLayer/TurnPanel.set_text("Turn "+ str(turn_count))
-		gameState = gameStates.INIT
-		process_board_evolution()
-		reset_board()
+		if game_over:
+			emit_signal("restart_game")
+#			get_tree().reload_current_scene()
+		else:
+			turn_count+=1
+			$CanvasLayer/TurnPanel.set_text("Turn "+ str(turn_count))
+			gameState = gameStates.INIT
+			process_board_evolution()
+			reset_board()
 	
 func _on_create_tile_near(vec, type):
 	var tile_to_change

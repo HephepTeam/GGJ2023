@@ -9,3 +9,7 @@ apply_on = "Ville"
 
 [node name="Spr" parent="." index="0"]
 texture = ExtResource("2_8d6aq")
+
+[node name="Modifiers" parent="." index="2"]
+apply_on = "Ville"
+vegetalisation = true
