@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c371crce51hxh"]
+[gd_scene load_steps=8 format=3 uid="uid://c371crce51hxh"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/tuile_base.gd" id="1_eu28o"]
 [ext_resource type="Texture2D" uid="uid://ba50nx868jx5o" path="res://assets/graphics/tuile_test.png" id="2_e2tan"]
 [ext_resource type="Texture2D" uid="uid://b8n0ihthnlfth" path="res://assets/graphics/modifier/shadow.png" id="2_i7vrg"]
 [ext_resource type="PackedScene" uid="uid://isgbln7bjgwj" path="res://scenes/modifiers.tscn" id="3_51mhp"]
+[ext_resource type="AudioStream" uid="uid://b3ir1hml65i0v" path="res://assets/sfx/bruit_up.mp3" id="5_ugkrn"]
+[ext_resource type="AudioStream" uid="uid://bwmwkvlc23p2r" path="res://assets/sfx/bruit_down.mp3" id="6_g1j5j"]
+[ext_resource type="AudioStream" uid="uid://buo2wrvjosbug" path="res://assets/sfx/bruit_clic.mp3" id="7_i3p28"]
 
 [node name="Tuile" type="Node2D"]
 script = ExtResource("1_eu28o")
@@ -50,6 +53,18 @@ one_shot = true
 
 [node name="Modifiers" parent="." instance=ExtResource("3_51mhp")]
 unique_name_in_owner = true
+
+[node name="FXup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ugkrn")
+volume_db = -20.0
+
+[node name="FXdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_g1j5j")
+volume_db = -20.0
+
+[node name="FXclic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i3p28")
+volume_db = -20.0
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

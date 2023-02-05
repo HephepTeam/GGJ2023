@@ -2,6 +2,8 @@ extends Node2D
 
 signal board_ready
 
+const description = "Pollution : [color=%s]%s[/color]\nBonus sur les tuiles adjacentes: [color=%s]%s[/color]\nEffet: %s "
+
 var tile_scene = preload("res://scenes/gameObjects/tuile_base.tscn")
 var plaine_tile = preload("res://scenes/gameObjects/plaine.tscn")
 var foret_tile = preload("res://scenes/gameObjects/foret.tscn")
@@ -27,6 +29,21 @@ var modifier_picked_twice = false
 
 func on_tile_pressed(coord):
 	print(coord)
+	
+func on_tile_hovered(tile):
+	if tile != null:
+		var bonus = "+"+str(tile.pollution_modifier) if (+tile.pollution_modifier >=0) else str(tile.pollution_modifier)
+		var side = "+"+str(tile.side_effect_modifier) if (tile.side_effect_modifier >=0) else str(tile.side_effect_modifier)
+		var color =""
+		if tile.pollution_modifier >= 0:
+			color= "green"
+		else:
+			color = "red"
+
+		var full_text = description % [color,bonus,color,side, tile.special_effect]
+		show_tooltip(full_text)
+	else:
+		hide_tooltip()
 	
 
 # Called when the node enters the scene tree for the first time.
@@ -56,14 +73,29 @@ func init_board():
 			tile.set_tile_coord(Vector2i(i,j))
 			tile.position = board.map_to_local(Vector2i(i,j))
 			tile.connect("tile_pressed", on_tile_pressed)
+			tile.connect("tile_hovered", on_tile_hovered)
 			board.add_child(tile)
 			tile.drop_animation()
 			await get_tree().create_timer(0.2).timeout
 	await get_tree().create_timer(0.1).timeout
 	emit_signal("board_ready")
-	$CanvasLayer/TurnPanel.set_text("Turn "+ str(turn_count))
+	$CanvasLayer/TurnPanel.set_text("Tour "+ str(turn_count+1))
 	$CanvasLayer/TurnPanel.anim_fade()
-			
+	$CanvasLayer/Panneau.anim_fade()
+
+
+
+func show_tooltip( text):
+	%Tooltip.clear()
+	%Tooltip.append_text(text)
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(%Tooltip, "modulate", Color( 1, 1, 1, 1 ), 0.2 )
+	
+func hide_tooltip():
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(%Tooltip, "modulate", Color( 1, 1, 1, 0 ), 0.2 )
 
 func apply_side_effect():
 	var tiles_list = []
@@ -89,6 +121,7 @@ func pick_modifiers():
 	for i in range(modifier_available):
 		var mod = modifiers[randi_range(0,modifiers.size()-1)].instantiate()
 		mod.position = modmarkers[i].position
+		mod.connect("hovered", _on_modfier_hovered)
 		mod.connect("dropped", _on_modfier_dropped)
 		mod.connect("grabbed", _on_modfier_grabbed)
 		$board.add_child(mod)
@@ -145,16 +178,30 @@ func _on_modfier_grabbed():
 	$CanvasLayer/new_pick.anim_depop()
 	$CanvasLayer/new_pick.enable = false
 
+func _on_modfier_hovered(entity):
+	if entity != null:
+		var full_text ="Effet: %s"
+		if entity.vegetalisation:
+			full_text = "Effet: Réduit le malus d'une ville à [color=green]0[/color]"
+		elif entity.reforestation:
+			full_text = "Effet: plante une graine qui germe en Forêt sous 2 tours sur une tuile Plaine"
+		else:
+			full_text = "Effet: ajoute [color=green]+1[/color] sur une tuile Plaine"
+
+		show_tooltip(full_text)
+	else:
+		hide_tooltip()
+		
+
 func _on_modfier_dropped(entity):
 	var map_coord = board.local_to_map(entity.position)
-	print(map_coord)
 	if (map_coord.x < board_size and map_coord.y < board_size) and (map_coord.x >= 0 and map_coord.y >= 0):
 		var tile = get_tile_from_map_coord(map_coord)
-		print(tile.name)
 		if tile.name.contains(entity.modifiers.apply_on):
 			modifier_available -= 1
 			entity.visible = false
-			if entity.modifiers.apply_on == "Ville":
+			$FXdrop.play()
+			if entity.modifiers.apply_on == "Ville" and tile.turn_left != -1:
 				tile.add_modifier(entity.modifiers, entity.get_texture(), true)
 			else:
 				if entity.modifiers.reforestation:

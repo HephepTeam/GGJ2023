@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx6pw8d3kjqiv"]
+[gd_scene load_steps=12 format=3 uid="uid://dx6pw8d3kjqiv"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/game.gd" id="1_5puaj"]
 [ext_resource type="Texture2D" uid="uid://b6tt871t8uhb5" path="res://assets/graphics/Fond_Bleu.png" id="2_h8dan"]
 [ext_resource type="PackedScene" uid="uid://c56560faryucm" path="res://scenes/UI/sprite_button.tscn" id="2_ujeim"]
 [ext_resource type="PackedScene" uid="uid://caju50huvnkro" path="res://scenes/UI/new_pick.tscn" id="4_6fo7d"]
 [ext_resource type="PackedScene" uid="uid://u818a31vxrv6" path="res://scenes/UI/turn_panel.tscn" id="5_0p0v8"]
+[ext_resource type="PackedScene" uid="uid://cpbpxbxl3kc24" path="res://scenes/UI/tooltip.tscn" id="6_2pxsm"]
 [ext_resource type="AudioStream" uid="uid://beh1n525hvkpl" path="res://assets/music/Musique_into_the_friche_ggj_2923.mp3" id="6_5hx0k"]
+[ext_resource type="AudioStream" uid="uid://b8kb6ju5xyoyd" path="res://assets/sfx/bruit_drop.mp3" id="7_mgevl"]
+[ext_resource type="PackedScene" uid="uid://bervp8aae0i80" path="res://scenes/UI/panneau.tscn" id="9_17hor"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
 resource_name = "Tiles"
@@ -63,11 +66,28 @@ position = Vector2(208, 904)
 
 [node name="TurnPanel" parent="CanvasLayer" instance=ExtResource("5_0p0v8")]
 
+[node name="Tooltip" parent="CanvasLayer" instance=ExtResource("6_2pxsm")]
+unique_name_in_owner = true
+offset_left = 1376.0
+offset_top = 198.0
+offset_right = 1888.0
+offset_bottom = 422.0
+
+[node name="Panneau" parent="CanvasLayer" instance=ExtResource("9_17hor")]
+offset_left = 913.0
+offset_top = 800.0
+offset_right = 1361.0
+offset_bottom = 1008.0
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("6_5hx0k")
 autoplay = true
 bus = &"Music"
+
+[node name="FXdrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_mgevl")
+bus = &"Sound"
 
 [connection signal="pressed" from="CanvasLayer/new_pick" to="." method="_on_new_pick_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurn" to="." method="_on_sprite_button_pressed"]

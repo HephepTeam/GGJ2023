@@ -51,6 +51,7 @@ func _on_input_event(viewport, event, shape_idx):
 				get_viewport().set_input_as_handled()
 				print("test")
 				emit_signal("pressed")
+				$FXclic.play()
 				anim_depop()
 
 

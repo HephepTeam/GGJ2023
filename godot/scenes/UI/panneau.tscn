@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://bervp8aae0i80"]
+
+[ext_resource type="Texture2D" uid="uid://b27kehkj52w0w" path="res://assets/graphics/UI/Boîte_Dialogue.png" id="1_cc74x"]
+[ext_resource type="Script" path="res://scenes/UI/TurnPanel.gd" id="2_rba52"]
+
+[node name="Panneau" type="NinePatchRect"]
+offset_right = 456.0
+offset_bottom = 208.0
+texture = ExtResource("1_cc74x")
+region_rect = Rect2(-3, -10, 278, 290)
+patch_margin_left = 75
+patch_margin_top = 107
+patch_margin_right = 53
+patch_margin_bottom = 59
+script = ExtResource("2_rba52")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 407.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Vous devez jouer:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 112.0
+offset_right = 448.0
+offset_bottom = 216.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "(changeable une fois)"
+horizontal_alignment = 1
+vertical_alignment = 1

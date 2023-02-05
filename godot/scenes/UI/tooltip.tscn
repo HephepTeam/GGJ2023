@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpbpxbxl3kc24"]
+
+[ext_resource type="Texture2D" uid="uid://b27kehkj52w0w" path="res://assets/graphics/UI/Boîte_Dialogue.png" id="1_bd4h0"]
+[ext_resource type="Script" path="res://scenes/UI/tooltip.gd" id="2_wprfg"]
+
+[node name="Tooltip" type="NinePatchRect"]
+offset_right = 536.0
+offset_bottom = 256.0
+texture = ExtResource("1_bd4h0")
+region_rect = Rect2(21, 38, 247, 241)
+patch_margin_left = 52
+patch_margin_top = 59
+patch_margin_right = 46
+patch_margin_bottom = 60
+script = ExtResource("2_wprfg")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 24.0
+offset_right = 488.0
+offset_bottom = 224.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 15
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "\"pollution score: [color=%s]%s[/color]
+bonus sur les tuiles adjacentes: [color=%s]%s[/color]
+effet: %s \""

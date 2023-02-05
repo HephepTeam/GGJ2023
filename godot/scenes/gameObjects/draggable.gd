@@ -1,11 +1,12 @@
 extends Area2D
 
-var hovered = false
+var is_hovered = false
 var is_grabbed = false
 var init = true
 
 signal init_finished
 signal grabbed
+signal hovered(entity)
 
 @export_file  var tiny_icon = "res://assets/graphics/modifier/Fleur_Dépolluante_icon.png"
 
@@ -32,7 +33,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !init:
-		if hovered:
+		if is_hovered:
 			$Spr.scale = lerp($Spr.scale , Vector2(1+hovered_offset,1+hovered_offset), 0.2)	
 		else:
 			$Spr.scale = lerp($Spr.scale, Vector2(1,1), 0.2)
@@ -56,10 +57,11 @@ func anim_pop():
 func _on_input_event(viewport, event, shape_idx):
 	if Globals.game.gameState == Globals.game.gameStates.PLAYING:
 		if (event is InputEventMouseMotion):
-			if !hovered:
-				hovered = true
+			if !is_hovered:
+				is_hovered = true
+				emit_signal("hovered", self)
 				
-		if (event is InputEventMouseButton) and hovered:
+		if (event is InputEventMouseButton) and is_hovered:
 			if event.is_pressed():
 				is_grabbed = true
 				emit_signal("grabbed")
@@ -71,4 +73,5 @@ func get_texture():
 	return load(tiny_icon)
 
 func _on_mouse_exited():
-	hovered = false
+	is_hovered = false
+	emit_signal("hovered", null)
