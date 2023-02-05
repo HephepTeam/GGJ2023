@@ -1,6 +1,6 @@
 extends Tuile
 
-signal create_tile_near(vec)
+signal create_tile_near(vec, type)
 
 var turn_left = 2
 
@@ -9,7 +9,7 @@ func end_turn():
 	turn_left -= 1
 	if turn_left == 0:
 		#evolution
-		emit_signal("create_tile_near", tile_coord)
+		emit_signal("create_tile_near", tile_coord, "ville")
 		
 func add_modifier(mod,spr_mod, vg = false):
 	super.add_modifier(mod,spr_mod)

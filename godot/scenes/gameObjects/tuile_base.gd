@@ -1,7 +1,7 @@
 class_name Tuile
 extends Node2D
 
-
+const description = "pollution score: [color=%s]%s[/color]\nbonus sur les tuiles adjacentes: [color=%s]%s[/color]\neffet: %s "
 
 signal tile_pressed(coord : Vector2)
 
@@ -13,9 +13,13 @@ var tile_coord = Vector2i() : set = set_tile_coord
 @export var pollution_modifier = 0
 @export var side_effect_modifier = 0
 @export var turn_modifier = 0
+@export var special_effect = ""
 
 func set_tile_coord(new_coord):
 	tile_coord = new_coord
+	
+signal finished_falling
+signal finished_going_up
 
 var hovered = false
 var falling = false
@@ -41,6 +45,8 @@ func _process(delta):
 		else:
 			$Spr.position.y = lerp($Spr.position.y, 0.0, 0.2)
 			
+	
+			
 	$Spr/Label.text = "[center][shake rate="+str(amplitude)+" level="+str(amplitude)+"]"+str(%Modifiers.pollution_modifier)+"[/shake][/center]"
 	
 	if !fading:
@@ -54,6 +60,7 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseMotion):
 		if !hovered:
 			hovered = true
+#			show_tooltip()
 			
 	if event is InputEventMouseButton:
 		if event.is_pressed() and !falling and Globals.game.gameState == Globals.game.gameStates.PLAYING:
@@ -68,6 +75,7 @@ func squash(x,y):
 
 func _on_area_2d_mouse_exited():
 	hovered = false
+#	hide_tooltip()
 		
 func make_fall():
 	falling = true
@@ -75,6 +83,24 @@ func make_fall():
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Spr, "position", $Spr.position + Vector2(0,falling_offset), 1.0 )
 	tween.tween_callback(queue_free)
+	
+	
+func make_fall_no_destroy():
+	falling = true
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property($Spr, "position", $Spr.position + Vector2(0,falling_offset), 1.0 )
+	await tween.finished
+	emit_signal("finished_falling")
+	
+func make_go_up():
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property($Spr, "position", $Spr.position - Vector2(0,falling_offset), 1.0 )
+	await tween.finished
+	emit_signal("finished_going_up")
+	
+	
 	
 func drop_animation():
 	$Spr.position.y -= falling_offset 
@@ -90,8 +116,33 @@ func make_highlight():
 	tween.tween_property($Spr/Label, "position", $Spr/Label.position - Vector2(0,50), 1.0 )
 	tween.parallel().tween_property($Spr/Label, "modulate", Color( 1, 1, 1, 0 ), 1.0 )
 	
-func reset_visual():
+	
+#func show_tooltip():
+#	$Infobulle/RichTextLabel.clear()
+#	var bonus = "+"+str(pollution_modifier) if (+pollution_modifier >=0) else str(pollution_modifier)
+#	var side = "+"+str(side_effect_modifier) if (side_effect_modifier >=0) else str(side_effect_modifier)
+#	var color =""
+#	if pollution_modifier >= 0:
+#		color= "green"
+#	else:
+#		color = "red"
+#
+#	var full_text = description % [color,bonus,color,side, special_effect]
+#	$Infobulle/RichTextLabel.append_text(full_text)
+#	var tween = get_tree().create_tween()
+#	tween.set_trans(Tween.TRANS_EXPO)
+#	tween.tween_property($Infobulle, "modulate", Color( 1, 1, 1, 1 ), 0.2 )
+	
+#func hide_tooltip():
+#	var tween = get_tree().create_tween()
+#	tween.set_trans(Tween.TRANS_EXPO)
+#	tween.tween_property($Infobulle, "modulate", Color( 1, 1, 1, 0 ), 0.2 )
+
+func reset_numbers():
 	fading = false
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_EXPO)
+	$Spr/Label.position += Vector2(0,50)
 	
 	
 func add_modifier(mod,spr_mod):

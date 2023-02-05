@@ -7,3 +7,6 @@
 
 [node name="Spr" parent="." index="0"]
 texture = ExtResource("2_wuoqx")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(32, 56, 144, 56, 144, 192, 32, 192)

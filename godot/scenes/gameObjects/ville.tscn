@@ -8,5 +8,5 @@
 script = ExtResource("2_fwydu")
 pollution_modifier = -1
 
-[node name="Spr" parent="." index="0"]
+[node name="Spr" parent="." index="1"]
 texture = ExtResource("2_xk8du")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx6pw8d3kjqiv"]
+[gd_scene load_steps=9 format=3 uid="uid://dx6pw8d3kjqiv"]
 
 [ext_resource type="Script" path="res://scenes/gameObjects/game.gd" id="1_5puaj"]
 [ext_resource type="Texture2D" uid="uid://b6tt871t8uhb5" path="res://assets/graphics/Fond_Bleu.png" id="2_h8dan"]
 [ext_resource type="PackedScene" uid="uid://c56560faryucm" path="res://scenes/UI/sprite_button.tscn" id="2_ujeim"]
+[ext_resource type="PackedScene" uid="uid://caju50huvnkro" path="res://scenes/UI/new_pick.tscn" id="4_6fo7d"]
+[ext_resource type="PackedScene" uid="uid://u818a31vxrv6" path="res://scenes/UI/turn_panel.tscn" id="5_0p0v8"]
+[ext_resource type="AudioStream" uid="uid://beh1n525hvkpl" path="res://assets/music/Musique_into_the_friche_ggj_2923.mp3" id="6_5hx0k"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_he5r6"]
 resource_name = "Tiles"
@@ -19,6 +22,7 @@ script = ExtResource("1_5puaj")
 [node name="background" type="Sprite2D" parent="."]
 texture = ExtResource("2_h8dan")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="board" type="Node2D" parent="."]
 position = Vector2(640, 128)
@@ -38,13 +42,7 @@ position = Vector2(1080, 496)
 [node name="mod2" type="Marker2D" parent="board"]
 position = Vector2(832, 776)
 
-[node name="Node2D" type="Node2D" parent="board"]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="EndTurn" parent="CanvasLayer" instance=ExtResource("2_ujeim")]
-visible = false
-position = Vector2(208, 904)
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 visible = false
@@ -57,4 +55,19 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 60
 text = "100 pts"
 
+[node name="new_pick" parent="CanvasLayer" instance=ExtResource("4_6fo7d")]
+position = Vector2(1576, 752)
+
+[node name="EndTurn" parent="CanvasLayer" instance=ExtResource("2_ujeim")]
+position = Vector2(208, 904)
+
+[node name="TurnPanel" parent="CanvasLayer" instance=ExtResource("5_0p0v8")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_5hx0k")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="CanvasLayer/new_pick" to="." method="_on_new_pick_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurn" to="." method="_on_sprite_button_pressed"]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brrbheqoub0xd" path="res://assets/graphics/modifier/reforestation.png" id="2_a4rpa"]
 
 [node name="Reforestation" instance=ExtResource("1_diey7")]
-tiny_icon = "res://assets/graphics/modifier/reforestation.png"
+tiny_icon = ""
 reforestation = true
 apply_on = "Plaine"
 turn_modifier = 2

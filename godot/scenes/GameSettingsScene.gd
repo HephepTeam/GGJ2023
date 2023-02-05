@@ -9,6 +9,7 @@ func _ready():
 	
 	overlay.visible = true
 	return_button.grab_focus()
+	$Music.play()
 
 func _on_fade_overlay_on_complete_fade_out():
 	get_tree().change_scene_to_file("res://scenes/MainMenuScene.tscn")
