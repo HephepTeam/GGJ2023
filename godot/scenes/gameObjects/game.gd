@@ -12,7 +12,7 @@ var ville_tile = preload("res://scenes/gameObjects/ville.tscn")
 var usine_tile = preload("res://scenes/gameObjects/usine.tscn")
 var tiles = [foret_tile, foret_tile, plaine_tile, foret_tile, usine_tile, usine_tile, usine_tile, \
 	plaine_tile, ville_tile, ville_tile, ville_tile, usine_tile, plaine_tile, plaine_tile, ville_tile, \
-	ville_tile, ville_tile, ville_tile, plaine_tile, plaine_tile, plaine_tile, ville_tile, plaine_tile, plaine_tile, plaine_tile]
+	plaine_tile, ville_tile, plaine_tile, plaine_tile, plaine_tile, plaine_tile, ville_tile, plaine_tile, plaine_tile, plaine_tile]
 var modifiers = [preload("res://scenes/gameObjects/depoluplante.tscn"),preload("res://scenes/gameObjects/vegetalisation.tscn"),preload("res://scenes/gameObjects/reforestation.tscn")]
 
 const board_size = 5
@@ -57,9 +57,8 @@ func _ready():
 		await %TutoPanel.destroyed
 		Globals.tuto_seen = true
 	else:
-		if $TutoPanel != null:
-			$TutoPanel.visible = false
-			$TutoPanel.queue_free()
+		%TutoPanel.visible = false
+		%TutoPanel.queue_free()
 	
 	randomize()
 	init_board()
@@ -163,7 +162,7 @@ func end_turn():
 	
 	#then show score
 	if result < 0:
-		$CanvasLayer/Score.set_color( Color.BROWN)
+		$CanvasLayer/Score.set_color( Color.RED)
 		game_over = true
 		$CanvasLayer/EndTurn.retry_mode()
 	else:
@@ -211,7 +210,7 @@ func _on_modfier_dropped(entity):
 	if (map_coord.x < board_size and map_coord.y < board_size) and (map_coord.x >= 0 and map_coord.y >= 0):
 		var tile = get_tile_from_map_coord(map_coord)
 		if tile.name.contains(entity.modifiers.apply_on):
-			if entity.modifiers.apply_on == "Ville" and !tile.turn_left < 0:
+			if entity.modifiers.apply_on == "Ville" and tile.turn_left >= 0:
 				tile.add_modifier(entity.modifiers, entity.get_texture(), true)
 				modifier_available -= 1
 				entity.visible = false

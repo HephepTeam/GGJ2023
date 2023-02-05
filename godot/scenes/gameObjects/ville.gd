@@ -2,11 +2,12 @@ extends Tuile
 
 signal create_tile_near(vec, type)
 
-var turn_left = 2
+var turn_left = 1
 
 
 func end_turn():
-	turn_left -= 1
+	if turn_left > 0:
+		turn_left -= 1
 	if turn_left == 0:
 		#evolution
 		emit_signal("create_tile_near", tile_coord, "ville")
